@@ -1,0 +1,516 @@
+openapi: 3.0.0
+info:
+  title: eventportal-backend
+  description: Eventportal API Spec
+  contact: 
+    email: mizphses@gmail.com
+  version: 1.0.0
+servers:
+  - url: 'https://mo7jqe46o9.execute-api.ap-northeast-1.amazonaws.com/Prod'
+    description: 'Production server'
+  - url: 'http://localhost:3000'
+    description: 'Local server'
+tags:
+  - name: test
+    description: 'APIの動作確認用のエンドポイントです。'
+  - name: proposal
+    description: '発表申し込み関連のエンドポイントです。'
+  - name: account
+    description: 'アカウント関連のエンドポイントです。'
+paths:
+  /api_work_test:
+    get:
+      description: "APIの動作確認用のエンドポイントです。"
+      operationId: 'working_test'
+      tags: ['test']
+      responses:
+        '200':
+          description: '200 response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkingTest'
+      x-amazon-apigateway-integration:
+        httpMethod: post
+        type: aws_proxy
+        uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EventPortalWorkingTest.Arn}/invocations
+  /adding_proposal:
+    post:
+      description: "発表申し込みを行うエンドポイントです。"
+      operationId: 'add_proposal'
+      tags: ['proposal']
+      requestBody:
+        description: '発表申し込みの内容'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventSpeechProposal'
+      responses:
+        '200':
+          description: '200 response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalReturn'
+        '400':
+          description: 'リクエストエラー（項目不足など）'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+        '403':
+          description: '発表申込ができないユーザーです'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+      x-amazon-apigateway-integration:
+        httpMethod: post
+        type: aws_proxy
+        uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EventportalPostSpeaker.Arn}/invocations
+      security:
+        - FirebaseAuthToken: []
+    put:
+      description: "発表申し込みの内容を更新するエンドポイントです。"
+      operationId: 'update_proposal'
+      tags: ['proposal']
+      requestBody:
+        description: '発表申し込みの内容'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventSpeechProposalUpdate'
+      responses:
+        '200':
+          description: '200 response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalReturn'
+        '400':
+          description: 'リクエストエラー（項目不足など）'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+        '403':
+          description: 'この発表の変更ができないユーザーです'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+      x-amazon-apigateway-integration:
+        httpMethod: post
+        type: aws_proxy
+        uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EventportalPostSpeaker.Arn}/invocations
+      security:
+        - FirebaseAuthToken: []
+  /check_proposal_all:
+    get:
+      description: "発表申し込みの内容すべてを取得するエンドポイント。"
+      operationId: 'check_all_proposal'
+      tags: ['proposal']
+      responses:
+        '200':
+          description: '200 response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalAllReturn'
+        '400':
+          description: 'リクエストエラー（項目不足など）'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+        '403':
+          description: 'この発表の閲覧ができないユーザーです'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+      x-amazon-apigateway-integration:
+        httpMethod: post
+        type: aws_proxy
+        uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EventportalPostSpeaker.Arn}/invocations
+      security:
+        - FirebaseAuthToken: []
+
+  /check_proposal/{Id}:
+    get:
+      description: "発表申し込みの内容を確認するエンドポイントです。"
+      operationId: 'check_proposal'
+      tags: ['proposal']
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: '発表申し込みのID'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200 response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalReturn'
+        '400':
+          description: 'リクエストエラー（項目不足など）'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+        '403':
+          description: 'この発表の閲覧ができないユーザーです'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+      x-amazon-apigateway-integration:
+        httpMethod: post
+        type: aws_proxy
+        uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EventportalPostSpeaker.Arn}/invocations
+      security:
+        - FirebaseAuthToken: []
+  /add_user:
+    post:
+      description: "ユーザーを追加するエンドポイントです。"
+      operationId: 'add_user'
+      tags: ['account']
+      requestBody:
+        description: 'ユーザーの情報'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAdd'
+      responses:
+        '200':
+          description: '200 response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCheckReturn'
+        '400':
+          description: 'リクエストエラー（項目不足など）'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+        '403':
+          description: 'この発表の閲覧ができないユーザーです'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+      x-amazon-apigateway-integration:
+        httpMethod: post
+        type: aws_proxy
+        uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EventportalPostSpeaker.Arn}/invocations
+      security:
+        - FirebaseAuthToken: []
+  /check_user:
+    get:
+      description: "ユーザーを確認するエンドポイントです。"
+      operationId: 'check_user'
+      tags: ['account']
+      responses:
+        '200':
+          description: '200 response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCheckReturn'
+        '400':
+          description: 'リクエストエラー（項目不足など）'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+        '403':
+          description: 'この発表の閲覧ができないユーザーです'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+      x-amazon-apigateway-integration:
+        httpMethod: post
+        type: aws_proxy
+        uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EventportalPostSpeaker.Arn}/invocations
+      security:
+        - FirebaseAuthToken: []
+  /update_user:
+    put:
+      description: "ユーザーを更新するエンドポイントです。"
+      operationId: 'update_user'
+      tags: ['account']
+      requestBody:
+        description: 'ユーザーの情報'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAdd'
+      responses:
+        '200':
+          description: '200 response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCheckReturn'
+        '400':
+          description: 'リクエストエラー（項目不足など）'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+        '403':
+          description: 'この発表の閲覧ができないユーザーです'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventSpeechProposalErrorReturn'
+      x-amazon-apigateway-integration:
+        httpMethod: post
+        type: aws_proxy
+        uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${EventportalPostSpeaker.Arn}/invocations
+      security:
+        - FirebaseAuthToken: []
+
+components:
+  schemas:
+    WorkingTest:
+      title: WorkingTest Schema
+      type: object
+      properties:
+        status:
+          type: string
+      additionalProperties: false
+    EventSpeechProposal:
+      title: EventSpeechProposal Schema
+      type: object
+      properties:
+        presentationType:
+          type: string
+          description: '発表形式。presentationまたはposter'
+        title:
+          type: string
+          description: '発表タイトル'
+        abstract:
+          type: string
+          description: '発表概要'
+        estimated_time:
+          type: integer
+          description: '発表時間(分)'
+        seminar:
+          type: string
+          description: 'ゼミ名または所属組織 ※運営委員としての発表の場合などはofficial, など例外があります'
+        speakers:
+          type: array
+          description: '登壇者情報'
+          items:
+            type: object
+            description: '登壇者のeメールアドレス(代表者含む)の配列'
+            properties:
+              email:
+                type: string
+                description: 'eメールアドレス'
+              name:
+                type: string
+                description: '名前'
+      additionalProperties: false
+    EventSpeechProposalUpdate:
+      title: EventSpeechProposalUpdate Schema
+      type: object
+      properties:
+        Id:
+          type: string
+          description: '申し込みのID'
+        presentationType:
+          type: string
+          description: '発表形式。presentationまたはposter'
+        title:
+          type: string
+          description: '発表タイトル'
+        abstract:
+          type: string
+          description: '発表概要'
+        estimated_time:
+          type: integer
+          description: '発表時間(分)'
+        seminar:
+          type: string
+          description: 'ゼミ名または所属組織 ※運営委員としての発表の場合などはofficial, など例外があります'
+        speakers:
+          type: array
+          description: '登壇者情報'
+          items:
+            type: object
+            description: '登壇者のeメールアドレス(代表者含む)の配列'
+            properties:
+              email:
+                type: string
+                description: 'eメールアドレス'
+              name:
+                type: string
+                description: '名前'
+      additionalProperties: false
+    EventSpeechProposalReturn:
+      title: EventSpeechProposalError Schema
+      type: object
+      properties:
+        status:
+          type: string
+          description: '申し込みのステータス'
+        item:
+          type: object
+          description: '申し込みの内容'
+          properties:
+            Id:
+              type: string
+              description: '申し込みのID'
+            presentationType:
+              type: string
+              description: '発表形式。presentationまたはposter'
+            title:
+              type: string
+              description: '発表タイトル'
+            speakers:
+              type: array
+              description: '登壇者情報'
+              items:
+                type: object
+                description: '登壇者のeメールアドレス(代表者含む)の配列'
+                properties:
+                  email:
+                    type: string
+                    description: 'eメールアドレス'
+                  name:
+                    type: string
+                    description: '名前'
+            abstract:
+              type: string
+              description: '発表概要'
+            estimated_time:
+              type: integer
+              description: '発表時間(分)'
+            seminar:
+              type: string
+              description: 'ゼミ名または所属組織 ※運営委員としての発表の場合などはofficial, など例外があります'
+    EventSpeechProposalAllReturn:
+      title: EventSpeechProposalError Schema
+      type: object
+      properties:
+        status:
+          type: string
+          description: '申し込みのステータス'
+        item:
+          type: array
+          description: '申し込みの内容'
+          items:
+            type: object
+            description: '申し込みの内容'
+            properties:
+              Id:
+                type: string
+                description: '申し込みのID'
+              presentationType:
+                type: string
+                description: '発表形式。presentationまたはposter'
+              title:
+                type: string
+                description: '発表タイトル'
+              speakers:
+                type: array
+                description: '登壇者情報'
+                items:
+                  type: object
+                  description: '登壇者のeメールアドレス(代表者含む)の配列'
+                  properties:
+                    email:
+                      type: string
+                      description: 'eメールアドレス'
+                    name:
+                      type: string
+                      description: '名前'
+              abstract:
+                type: string
+                description: '発表概要'
+              estimated_time:
+                type: integer
+                description: '発表時間(分)'
+              seminar:
+                type: string
+                description: 'ゼミ名または所属組織 ※運営委員としての発表の場合などはofficial, など例外があります'
+
+      additionalProperties: false
+    EventSpeechProposalErrorReturn:
+      title: EventSpeechProposalErrorReturn Schema
+      type: object
+      properties:
+        status:
+          type: string
+          description: '申し込みのステータス'
+        Id:
+          type: string
+          description: '申し込みのID'
+        message:
+          type: string
+          description: 'エラーメッセージ'
+      additionalProperties: false
+    UserAdd:
+      title: UserAdd Schema
+      type: object
+      properties:
+        name:
+          type: string
+          description: '名前'
+        affiliation:
+          type: string
+          description: '所属'
+        department:
+          type: string
+          description: '学部学科'
+      additionalProperties: false
+    UserCheckReturn:
+      title: UserCheck Return Schema
+      type: object
+      properties:
+        status:
+          type: string
+          description: '操作のステータス'
+        data:
+          type: object
+          description: 'ユーザーの情報'
+          properties:
+            uid: 
+              type: string
+              description: 'ユーザーID'
+            name:
+              type: string
+              description: '名前'
+            email:
+              type: string
+              description: 'メールアドレス'
+            affiliation:
+              type: string
+              description: '所属'
+            department:
+              type: string
+              description: '学部学科'
+  securitySchemes:
+    FirebaseAuthToken:
+      type: apiKey
+      name: Authorization
+      in: header
