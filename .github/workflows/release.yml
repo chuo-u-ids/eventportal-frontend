@@ -39,6 +39,9 @@ jobs:
 
       - name: Build
         run: bun run generate
+        env:
+          NODE_ENV: production
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY_PROD }}
 
       - name: Publish to AWS S3
         id: s3_sync
