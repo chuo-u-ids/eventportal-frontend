@@ -8,18 +8,47 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "gen:api": "openapi-generator-cli generate -i ./docs/openapi.yml -g typescript-fetch -o ./api/generated"
+    "lint:prettier": "prettier -c .",
+    "lint:prettier-fix": "bun run lint:prettier -- --write",
+    "lint:js": "eslint --ext .js,.ts,.vue .",
+    "lint:js-fix": "bun run lint:js -- --fix",
+    "lint:style": "stylelint \"**/*.vue\" \",**/*.css\" \",**/*.scss\" --ignore-path .gitignore",
+    "lint:style-fix": "stylelint \"**/*.vue\" \",**/*.css\" \",**/*.scss\" --ignore-path .gitignore --fix",
+    "fix": "bun run lint:prettier-fix; bun run lint:js-fix; bun run lint:style-fix",
+    "prepare": "husky install",
+    "gen-api": "openapi-generator-cli generate -i docs/coefont.openapi.json -g typescript-fetch -o scripts/openapi"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.8.1",
-    "vue": "^3.3.8",
-    "vue-router": "^4.2.5",
-    "@openapitools/openapi-generator-cli": "^2.7.0"
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@openapitools/openapi-generator-cli": "^2.7.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "husky": "^8.0.0",
+    "normalize.css": "^8.0.1",
+    "nuxt": "^3.8.0",
+    "nuxt-vuefire": "^0.4.1",
+    "openapi-typescript": "^6.7.0",
+    "postcss-html": "^1.5.0",
+    "prettier": "^3.0.3",
+    "stylelint": "^15.11.0",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-recess-order": "^4.3.0",
+    "stylelint-config-standard-scss": "^11.1.0",
+    "typescript": "^5.2.2",
+    "vue": "^3.3.7",
+    "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "firebase": "^10.6.0",
-    "nuxt-vuefire": "^0.4.1",
-    "vuefire": "^3.1.18"
+    "@zadigetvoltaire/nuxt-gtm": "^0.0.13",
+    "budoux": "^0.5.2",
+    "js-sha256": "^0.10.1",
+    "sass": "^1.69.5",
+    "sha-256": "^1.0.3",
+    "sitemap": "^7.1.1",
+    "type-fest": "^4.6.0"
   }
 }

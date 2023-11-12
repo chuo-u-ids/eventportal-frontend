@@ -1,20 +1,29 @@
 <template>
   <div>
     <p>展示・発表内容の確認</p>
-<hr />
+    <hr />
     <p>発表タイトル: {{ dataToDisplay.title }}</p>
     <p>登録番号: {{ id }}</p>
     <p>発表方法: {{ checkPresentationType(dataToDisplay.presentationType) }}</p>
     <p>発表概要</p>
     <p>{{ dataToDisplay._abstract }}</p>
-    <p>発表者: <span v-for="speaker in dataToDisplay.speakers">{{ speaker }} </span>
-    （{{dataToDisplay.seminar}}より） </p>
+    <p>
+      発表者:
+      <span v-for="speaker in dataToDisplay.speakers" :key="speaker"
+        >{{ speaker }}
+      </span>
+      （{{ dataToDisplay.seminar }}より）
+    </p>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useRoute } from 'vue-router'
-import { ProposalApi, type CheckProposalRequest, type EventSpeechProposalReturnItem } from '~/api/generated';
+import {
+  ProposalApi,
+  type CheckProposalRequest,
+  type EventSpeechProposalReturnItem
+} from '~/api/generated'
 const id = useRoute().params.id
 const dataToDisplay: Ref<EventSpeechProposalReturnItem> = ref({})
 const api = new ProposalApi()

@@ -12,86 +12,88 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { exists, mapValues } from '../runtime'
 /**
  * ユーザーの情報
  * @export
  * @interface UserCheckReturnData
  */
 export interface UserCheckReturnData {
-    /**
-     * ユーザーID
-     * @type {string}
-     * @memberof UserCheckReturnData
-     */
-    uid?: string;
-    /**
-     * 名前
-     * @type {string}
-     * @memberof UserCheckReturnData
-     */
-    name?: string;
-    /**
-     * メールアドレス
-     * @type {string}
-     * @memberof UserCheckReturnData
-     */
-    email?: string;
-    /**
-     * 所属
-     * @type {string}
-     * @memberof UserCheckReturnData
-     */
-    affiliation?: string;
-    /**
-     * 学部学科
-     * @type {string}
-     * @memberof UserCheckReturnData
-     */
-    department?: string;
+  /**
+   * ユーザーID
+   * @type {string}
+   * @memberof UserCheckReturnData
+   */
+  uid?: string
+  /**
+   * 名前
+   * @type {string}
+   * @memberof UserCheckReturnData
+   */
+  name?: string
+  /**
+   * メールアドレス
+   * @type {string}
+   * @memberof UserCheckReturnData
+   */
+  email?: string
+  /**
+   * 所属
+   * @type {string}
+   * @memberof UserCheckReturnData
+   */
+  affiliation?: string
+  /**
+   * 学部学科
+   * @type {string}
+   * @memberof UserCheckReturnData
+   */
+  department?: string
 }
 
 /**
  * Check if a given object implements the UserCheckReturnData interface.
  */
 export function instanceOfUserCheckReturnData(value: object): boolean {
-    let isInstance = true;
+  let isInstance = true
 
-    return isInstance;
+  return isInstance
 }
 
 export function UserCheckReturnDataFromJSON(json: any): UserCheckReturnData {
-    return UserCheckReturnDataFromJSONTyped(json, false);
+  return UserCheckReturnDataFromJSONTyped(json, false)
 }
 
-export function UserCheckReturnDataFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserCheckReturnData {
-    if ((json === undefined) || (json === null)) {
-        return json;
-    }
-    return {
-        
-        'uid': !exists(json, 'uid') ? undefined : json['uid'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'affiliation': !exists(json, 'affiliation') ? undefined : json['affiliation'],
-        'department': !exists(json, 'department') ? undefined : json['department'],
-    };
+export function UserCheckReturnDataFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): UserCheckReturnData {
+  if (json === undefined || json === null) {
+    return json
+  }
+  return {
+    uid: !exists(json, 'uid') ? undefined : json['uid'],
+    name: !exists(json, 'name') ? undefined : json['name'],
+    email: !exists(json, 'email') ? undefined : json['email'],
+    affiliation: !exists(json, 'affiliation') ? undefined : json['affiliation'],
+    department: !exists(json, 'department') ? undefined : json['department']
+  }
 }
 
-export function UserCheckReturnDataToJSON(value?: UserCheckReturnData | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
-    }
-    return {
-        
-        'uid': value.uid,
-        'name': value.name,
-        'email': value.email,
-        'affiliation': value.affiliation,
-        'department': value.department,
-    };
+export function UserCheckReturnDataToJSON(
+  value?: UserCheckReturnData | null
+): any {
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
+  return {
+    uid: value.uid,
+    name: value.name,
+    email: value.email,
+    affiliation: value.affiliation,
+    department: value.department
+  }
 }
-

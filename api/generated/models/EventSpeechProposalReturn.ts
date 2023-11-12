@@ -12,69 +12,75 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { EventSpeechProposalReturnItem } from './EventSpeechProposalReturnItem';
+import { exists, mapValues } from '../runtime'
+import type { EventSpeechProposalReturnItem } from './EventSpeechProposalReturnItem'
 import {
-    EventSpeechProposalReturnItemFromJSON,
-    EventSpeechProposalReturnItemFromJSONTyped,
-    EventSpeechProposalReturnItemToJSON,
-} from './EventSpeechProposalReturnItem';
+  EventSpeechProposalReturnItemFromJSON,
+  EventSpeechProposalReturnItemFromJSONTyped,
+  EventSpeechProposalReturnItemToJSON
+} from './EventSpeechProposalReturnItem'
 
 /**
- * 
+ *
  * @export
  * @interface EventSpeechProposalReturn
  */
 export interface EventSpeechProposalReturn {
-    /**
-     * 申し込みのステータス
-     * @type {string}
-     * @memberof EventSpeechProposalReturn
-     */
-    status?: string;
-    /**
-     * 
-     * @type {EventSpeechProposalReturnItem}
-     * @memberof EventSpeechProposalReturn
-     */
-    item?: EventSpeechProposalReturnItem;
+  /**
+   * 申し込みのステータス
+   * @type {string}
+   * @memberof EventSpeechProposalReturn
+   */
+  status?: string
+  /**
+   *
+   * @type {EventSpeechProposalReturnItem}
+   * @memberof EventSpeechProposalReturn
+   */
+  item?: EventSpeechProposalReturnItem
 }
 
 /**
  * Check if a given object implements the EventSpeechProposalReturn interface.
  */
 export function instanceOfEventSpeechProposalReturn(value: object): boolean {
-    let isInstance = true;
+  let isInstance = true
 
-    return isInstance;
+  return isInstance
 }
 
-export function EventSpeechProposalReturnFromJSON(json: any): EventSpeechProposalReturn {
-    return EventSpeechProposalReturnFromJSONTyped(json, false);
+export function EventSpeechProposalReturnFromJSON(
+  json: any
+): EventSpeechProposalReturn {
+  return EventSpeechProposalReturnFromJSONTyped(json, false)
 }
 
-export function EventSpeechProposalReturnFromJSONTyped(json: any, ignoreDiscriminator: boolean): EventSpeechProposalReturn {
-    if ((json === undefined) || (json === null)) {
-        return json;
-    }
-    return {
-        
-        'status': !exists(json, 'status') ? undefined : json['status'],
-        'item': !exists(json, 'item') ? undefined : EventSpeechProposalReturnItemFromJSON(json['item']),
-    };
+export function EventSpeechProposalReturnFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): EventSpeechProposalReturn {
+  if (json === undefined || json === null) {
+    return json
+  }
+  return {
+    status: !exists(json, 'status') ? undefined : json['status'],
+    item: !exists(json, 'item')
+      ? undefined
+      : EventSpeechProposalReturnItemFromJSON(json['item'])
+  }
 }
 
-export function EventSpeechProposalReturnToJSON(value?: EventSpeechProposalReturn | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
-    }
-    return {
-        
-        'status': value.status,
-        'item': EventSpeechProposalReturnItemToJSON(value.item),
-    };
+export function EventSpeechProposalReturnToJSON(
+  value?: EventSpeechProposalReturn | null
+): any {
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
+  return {
+    status: value.status,
+    item: EventSpeechProposalReturnItemToJSON(value.item)
+  }
 }
-

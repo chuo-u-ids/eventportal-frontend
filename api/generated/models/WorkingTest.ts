@@ -12,54 +12,54 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { exists, mapValues } from '../runtime'
 /**
- * 
+ *
  * @export
  * @interface WorkingTest
  */
 export interface WorkingTest {
-    /**
-     * 
-     * @type {string}
-     * @memberof WorkingTest
-     */
-    status?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof WorkingTest
+   */
+  status?: string
 }
 
 /**
  * Check if a given object implements the WorkingTest interface.
  */
 export function instanceOfWorkingTest(value: object): boolean {
-    let isInstance = true;
+  let isInstance = true
 
-    return isInstance;
+  return isInstance
 }
 
 export function WorkingTestFromJSON(json: any): WorkingTest {
-    return WorkingTestFromJSONTyped(json, false);
+  return WorkingTestFromJSONTyped(json, false)
 }
 
-export function WorkingTestFromJSONTyped(json: any, ignoreDiscriminator: boolean): WorkingTest {
-    if ((json === undefined) || (json === null)) {
-        return json;
-    }
-    return {
-        
-        'status': !exists(json, 'status') ? undefined : json['status'],
-    };
+export function WorkingTestFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): WorkingTest {
+  if (json === undefined || json === null) {
+    return json
+  }
+  return {
+    status: !exists(json, 'status') ? undefined : json['status']
+  }
 }
 
 export function WorkingTestToJSON(value?: WorkingTest | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
-    }
-    return {
-        
-        'status': value.status,
-    };
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
+  return {
+    status: value.status
+  }
 }
-

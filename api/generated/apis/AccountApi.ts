@@ -12,137 +12,180 @@
  * Do not edit the class manually.
  */
 
-
-import * as runtime from '../runtime';
+import * as runtime from '../runtime'
 import type {
   EventSpeechProposalErrorReturn,
   UserAdd,
-  UserCheckReturn,
-} from '../models/index';
+  UserCheckReturn
+} from '../models/index'
 import {
-    EventSpeechProposalErrorReturnFromJSON,
-    EventSpeechProposalErrorReturnToJSON,
-    UserAddFromJSON,
-    UserAddToJSON,
-    UserCheckReturnFromJSON,
-    UserCheckReturnToJSON,
-} from '../models/index';
+  EventSpeechProposalErrorReturnFromJSON,
+  EventSpeechProposalErrorReturnToJSON,
+  UserAddFromJSON,
+  UserAddToJSON,
+  UserCheckReturnFromJSON,
+  UserCheckReturnToJSON
+} from '../models/index'
 
 export interface AddUserRequest {
-    userAdd: UserAdd;
+  userAdd: UserAdd
 }
 
 export interface UpdateUserRequest {
-    userAdd: UserAdd;
+  userAdd: UserAdd
 }
 
 /**
- * 
+ *
  */
 export class AccountApi extends runtime.BaseAPI {
-
-    /**
-     * ユーザーを追加するエンドポイントです。
-     */
-    async addUserRaw(requestParameters: AddUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserCheckReturn>> {
-        if (requestParameters.userAdd === null || requestParameters.userAdd === undefined) {
-            throw new runtime.RequiredError('userAdd','Required parameter requestParameters.userAdd was null or undefined when calling addUser.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // FirebaseAuthToken authentication
-        }
-
-        const response = await this.request({
-            path: `/add_user`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: UserAddToJSON(requestParameters.userAdd),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserCheckReturnFromJSON(jsonValue));
+  /**
+   * ユーザーを追加するエンドポイントです。
+   */
+  async addUserRaw(
+    requestParameters: AddUserRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<runtime.ApiResponse<UserCheckReturn>> {
+    if (
+      requestParameters.userAdd === null ||
+      requestParameters.userAdd === undefined
+    ) {
+      throw new runtime.RequiredError(
+        'userAdd',
+        'Required parameter requestParameters.userAdd was null or undefined when calling addUser.'
+      )
     }
 
-    /**
-     * ユーザーを追加するエンドポイントです。
-     */
-    async addUser(requestParameters: AddUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserCheckReturn> {
-        const response = await this.addUserRaw(requestParameters, initOverrides);
-        return await response.value();
+    const queryParameters: any = {}
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    headerParameters['Content-Type'] = 'application/json'
+
+    if (this.configuration && this.configuration.apiKey) {
+      headerParameters['Authorization'] =
+        this.configuration.apiKey('Authorization') // FirebaseAuthToken authentication
     }
 
-    /**
-     * ユーザーを確認するエンドポイントです。
-     */
-    async checkUserRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserCheckReturn>> {
-        const queryParameters: any = {};
+    const response = await this.request(
+      {
+        path: `/add_user`,
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: UserAddToJSON(requestParameters.userAdd)
+      },
+      initOverrides
+    )
 
-        const headerParameters: runtime.HTTPHeaders = {};
+    return new runtime.JSONApiResponse(response, (jsonValue) =>
+      UserCheckReturnFromJSON(jsonValue)
+    )
+  }
 
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // FirebaseAuthToken authentication
-        }
+  /**
+   * ユーザーを追加するエンドポイントです。
+   */
+  async addUser(
+    requestParameters: AddUserRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<UserCheckReturn> {
+    const response = await this.addUserRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
 
-        const response = await this.request({
-            path: `/check_user`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
+  /**
+   * ユーザーを確認するエンドポイントです。
+   */
+  async checkUserRaw(
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<runtime.ApiResponse<UserCheckReturn>> {
+    const queryParameters: any = {}
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserCheckReturnFromJSON(jsonValue));
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    if (this.configuration && this.configuration.apiKey) {
+      headerParameters['Authorization'] =
+        this.configuration.apiKey('Authorization') // FirebaseAuthToken authentication
     }
 
-    /**
-     * ユーザーを確認するエンドポイントです。
-     */
-    async checkUser(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserCheckReturn> {
-        const response = await this.checkUserRaw(initOverrides);
-        return await response.value();
+    const response = await this.request(
+      {
+        path: `/check_user`,
+        method: 'GET',
+        headers: headerParameters,
+        query: queryParameters
+      },
+      initOverrides
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) =>
+      UserCheckReturnFromJSON(jsonValue)
+    )
+  }
+
+  /**
+   * ユーザーを確認するエンドポイントです。
+   */
+  async checkUser(
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<UserCheckReturn> {
+    const response = await this.checkUserRaw(initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * ユーザーを更新するエンドポイントです。
+   */
+  async updateUserRaw(
+    requestParameters: UpdateUserRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<runtime.ApiResponse<UserCheckReturn>> {
+    if (
+      requestParameters.userAdd === null ||
+      requestParameters.userAdd === undefined
+    ) {
+      throw new runtime.RequiredError(
+        'userAdd',
+        'Required parameter requestParameters.userAdd was null or undefined when calling updateUser.'
+      )
     }
 
-    /**
-     * ユーザーを更新するエンドポイントです。
-     */
-    async updateUserRaw(requestParameters: UpdateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserCheckReturn>> {
-        if (requestParameters.userAdd === null || requestParameters.userAdd === undefined) {
-            throw new runtime.RequiredError('userAdd','Required parameter requestParameters.userAdd was null or undefined when calling updateUser.');
-        }
+    const queryParameters: any = {}
 
-        const queryParameters: any = {};
+    const headerParameters: runtime.HTTPHeaders = {}
 
-        const headerParameters: runtime.HTTPHeaders = {};
+    headerParameters['Content-Type'] = 'application/json'
 
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // FirebaseAuthToken authentication
-        }
-
-        const response = await this.request({
-            path: `/update_user`,
-            method: 'PUT',
-            headers: headerParameters,
-            query: queryParameters,
-            body: UserAddToJSON(requestParameters.userAdd),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserCheckReturnFromJSON(jsonValue));
+    if (this.configuration && this.configuration.apiKey) {
+      headerParameters['Authorization'] =
+        this.configuration.apiKey('Authorization') // FirebaseAuthToken authentication
     }
 
-    /**
-     * ユーザーを更新するエンドポイントです。
-     */
-    async updateUser(requestParameters: UpdateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserCheckReturn> {
-        const response = await this.updateUserRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
+    const response = await this.request(
+      {
+        path: `/update_user`,
+        method: 'PUT',
+        headers: headerParameters,
+        query: queryParameters,
+        body: UserAddToJSON(requestParameters.userAdd)
+      },
+      initOverrides
+    )
 
+    return new runtime.JSONApiResponse(response, (jsonValue) =>
+      UserCheckReturnFromJSON(jsonValue)
+    )
+  }
+
+  /**
+   * ユーザーを更新するエンドポイントです。
+   */
+  async updateUser(
+    requestParameters: UpdateUserRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<UserCheckReturn> {
+    const response = await this.updateUserRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
 }

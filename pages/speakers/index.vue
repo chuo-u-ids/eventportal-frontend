@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ProposalApi, type EventSpeechProposalAllReturn } from '~/api/generated';
+import { ProposalApi, type EventSpeechProposalAllReturn } from '~/api/generated'
 const api = new ProposalApi()
 
 const allArray: Ref<EventSpeechProposalAllReturn> = ref({})

@@ -12,181 +12,250 @@
  * Do not edit the class manually.
  */
 
-
-import * as runtime from '../runtime';
+import * as runtime from '../runtime'
 import type {
   EventSpeechProposal,
   EventSpeechProposalAllReturn,
   EventSpeechProposalErrorReturn,
   EventSpeechProposalReturn,
-  EventSpeechProposalUpdate,
-} from '../models/index';
+  EventSpeechProposalUpdate
+} from '../models/index'
 import {
-    EventSpeechProposalFromJSON,
-    EventSpeechProposalToJSON,
-    EventSpeechProposalAllReturnFromJSON,
-    EventSpeechProposalAllReturnToJSON,
-    EventSpeechProposalErrorReturnFromJSON,
-    EventSpeechProposalErrorReturnToJSON,
-    EventSpeechProposalReturnFromJSON,
-    EventSpeechProposalReturnToJSON,
-    EventSpeechProposalUpdateFromJSON,
-    EventSpeechProposalUpdateToJSON,
-} from '../models/index';
+  EventSpeechProposalFromJSON,
+  EventSpeechProposalToJSON,
+  EventSpeechProposalAllReturnFromJSON,
+  EventSpeechProposalAllReturnToJSON,
+  EventSpeechProposalErrorReturnFromJSON,
+  EventSpeechProposalErrorReturnToJSON,
+  EventSpeechProposalReturnFromJSON,
+  EventSpeechProposalReturnToJSON,
+  EventSpeechProposalUpdateFromJSON,
+  EventSpeechProposalUpdateToJSON
+} from '../models/index'
 
 export interface AddProposalRequest {
-    eventSpeechProposal: EventSpeechProposal;
+  eventSpeechProposal: EventSpeechProposal
 }
 
 export interface CheckProposalRequest {
-    id: string;
+  id: string
 }
 
 export interface UpdateProposalRequest {
-    eventSpeechProposalUpdate: EventSpeechProposalUpdate;
+  eventSpeechProposalUpdate: EventSpeechProposalUpdate
 }
 
 /**
- * 
+ *
  */
 export class ProposalApi extends runtime.BaseAPI {
-
-    /**
-     * 発表申し込みを行うエンドポイントです。
-     */
-    async addProposalRaw(requestParameters: AddProposalRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EventSpeechProposalReturn>> {
-        if (requestParameters.eventSpeechProposal === null || requestParameters.eventSpeechProposal === undefined) {
-            throw new runtime.RequiredError('eventSpeechProposal','Required parameter requestParameters.eventSpeechProposal was null or undefined when calling addProposal.');
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // FirebaseAuthToken authentication
-        }
-
-        const response = await this.request({
-            path: `/adding_proposal`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: EventSpeechProposalToJSON(requestParameters.eventSpeechProposal),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => EventSpeechProposalReturnFromJSON(jsonValue));
+  /**
+   * 発表申し込みを行うエンドポイントです。
+   */
+  async addProposalRaw(
+    requestParameters: AddProposalRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<runtime.ApiResponse<EventSpeechProposalReturn>> {
+    if (
+      requestParameters.eventSpeechProposal === null ||
+      requestParameters.eventSpeechProposal === undefined
+    ) {
+      throw new runtime.RequiredError(
+        'eventSpeechProposal',
+        'Required parameter requestParameters.eventSpeechProposal was null or undefined when calling addProposal.'
+      )
     }
 
-    /**
-     * 発表申し込みを行うエンドポイントです。
-     */
-    async addProposal(requestParameters: AddProposalRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EventSpeechProposalReturn> {
-        const response = await this.addProposalRaw(requestParameters, initOverrides);
-        return await response.value();
+    const queryParameters: any = {}
+
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    headerParameters['Content-Type'] = 'application/json'
+
+    if (this.configuration && this.configuration.apiKey) {
+      headerParameters['Authorization'] =
+        this.configuration.apiKey('Authorization') // FirebaseAuthToken authentication
     }
 
-    /**
-     * 発表申し込みの内容すべてを取得するエンドポイント。
-     */
-    async checkAllProposalRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EventSpeechProposalAllReturn>> {
-        const queryParameters: any = {};
+    const response = await this.request(
+      {
+        path: `/adding_proposal`,
+        method: 'POST',
+        headers: headerParameters,
+        query: queryParameters,
+        body: EventSpeechProposalToJSON(requestParameters.eventSpeechProposal)
+      },
+      initOverrides
+    )
 
-        const headerParameters: runtime.HTTPHeaders = {};
+    return new runtime.JSONApiResponse(response, (jsonValue) =>
+      EventSpeechProposalReturnFromJSON(jsonValue)
+    )
+  }
 
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // FirebaseAuthToken authentication
-        }
+  /**
+   * 発表申し込みを行うエンドポイントです。
+   */
+  async addProposal(
+    requestParameters: AddProposalRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<EventSpeechProposalReturn> {
+    const response = await this.addProposalRaw(requestParameters, initOverrides)
+    return await response.value()
+  }
 
-        const response = await this.request({
-            path: `/check_proposal_all`,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
+  /**
+   * 発表申し込みの内容すべてを取得するエンドポイント。
+   */
+  async checkAllProposalRaw(
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<runtime.ApiResponse<EventSpeechProposalAllReturn>> {
+    const queryParameters: any = {}
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => EventSpeechProposalAllReturnFromJSON(jsonValue));
+    const headerParameters: runtime.HTTPHeaders = {}
+
+    if (this.configuration && this.configuration.apiKey) {
+      headerParameters['Authorization'] =
+        this.configuration.apiKey('Authorization') // FirebaseAuthToken authentication
     }
 
-    /**
-     * 発表申し込みの内容すべてを取得するエンドポイント。
-     */
-    async checkAllProposal(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EventSpeechProposalAllReturn> {
-        const response = await this.checkAllProposalRaw(initOverrides);
-        return await response.value();
+    const response = await this.request(
+      {
+        path: `/check_proposal_all`,
+        method: 'GET',
+        headers: headerParameters,
+        query: queryParameters
+      },
+      initOverrides
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) =>
+      EventSpeechProposalAllReturnFromJSON(jsonValue)
+    )
+  }
+
+  /**
+   * 発表申し込みの内容すべてを取得するエンドポイント。
+   */
+  async checkAllProposal(
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<EventSpeechProposalAllReturn> {
+    const response = await this.checkAllProposalRaw(initOverrides)
+    return await response.value()
+  }
+
+  /**
+   * 発表申し込みの内容を確認するエンドポイントです。
+   */
+  async checkProposalRaw(
+    requestParameters: CheckProposalRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<runtime.ApiResponse<EventSpeechProposalReturn>> {
+    if (requestParameters.id === null || requestParameters.id === undefined) {
+      throw new runtime.RequiredError(
+        'id',
+        'Required parameter requestParameters.id was null or undefined when calling checkProposal.'
+      )
     }
 
-    /**
-     * 発表申し込みの内容を確認するエンドポイントです。
-     */
-    async checkProposalRaw(requestParameters: CheckProposalRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EventSpeechProposalReturn>> {
-        if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling checkProposal.');
-        }
+    const queryParameters: any = {}
 
-        const queryParameters: any = {};
+    const headerParameters: runtime.HTTPHeaders = {}
 
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // FirebaseAuthToken authentication
-        }
-
-        const response = await this.request({
-            path: `/check_proposal/{Id}`.replace(`{${"Id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => EventSpeechProposalReturnFromJSON(jsonValue));
+    if (this.configuration && this.configuration.apiKey) {
+      headerParameters['Authorization'] =
+        this.configuration.apiKey('Authorization') // FirebaseAuthToken authentication
     }
 
-    /**
-     * 発表申し込みの内容を確認するエンドポイントです。
-     */
-    async checkProposal(requestParameters: CheckProposalRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EventSpeechProposalReturn> {
-        const response = await this.checkProposalRaw(requestParameters, initOverrides);
-        return await response.value();
+    const response = await this.request(
+      {
+        path: `/check_proposal/{Id}`.replace(
+          `{${'Id'}}`,
+          encodeURIComponent(String(requestParameters.id))
+        ),
+        method: 'GET',
+        headers: headerParameters,
+        query: queryParameters
+      },
+      initOverrides
+    )
+
+    return new runtime.JSONApiResponse(response, (jsonValue) =>
+      EventSpeechProposalReturnFromJSON(jsonValue)
+    )
+  }
+
+  /**
+   * 発表申し込みの内容を確認するエンドポイントです。
+   */
+  async checkProposal(
+    requestParameters: CheckProposalRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<EventSpeechProposalReturn> {
+    const response = await this.checkProposalRaw(
+      requestParameters,
+      initOverrides
+    )
+    return await response.value()
+  }
+
+  /**
+   * 発表申し込みの内容を更新するエンドポイントです。
+   */
+  async updateProposalRaw(
+    requestParameters: UpdateProposalRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<runtime.ApiResponse<EventSpeechProposalReturn>> {
+    if (
+      requestParameters.eventSpeechProposalUpdate === null ||
+      requestParameters.eventSpeechProposalUpdate === undefined
+    ) {
+      throw new runtime.RequiredError(
+        'eventSpeechProposalUpdate',
+        'Required parameter requestParameters.eventSpeechProposalUpdate was null or undefined when calling updateProposal.'
+      )
     }
 
-    /**
-     * 発表申し込みの内容を更新するエンドポイントです。
-     */
-    async updateProposalRaw(requestParameters: UpdateProposalRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EventSpeechProposalReturn>> {
-        if (requestParameters.eventSpeechProposalUpdate === null || requestParameters.eventSpeechProposalUpdate === undefined) {
-            throw new runtime.RequiredError('eventSpeechProposalUpdate','Required parameter requestParameters.eventSpeechProposalUpdate was null or undefined when calling updateProposal.');
-        }
+    const queryParameters: any = {}
 
-        const queryParameters: any = {};
+    const headerParameters: runtime.HTTPHeaders = {}
 
-        const headerParameters: runtime.HTTPHeaders = {};
+    headerParameters['Content-Type'] = 'application/json'
 
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = this.configuration.apiKey("Authorization"); // FirebaseAuthToken authentication
-        }
-
-        const response = await this.request({
-            path: `/adding_proposal`,
-            method: 'PUT',
-            headers: headerParameters,
-            query: queryParameters,
-            body: EventSpeechProposalUpdateToJSON(requestParameters.eventSpeechProposalUpdate),
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => EventSpeechProposalReturnFromJSON(jsonValue));
+    if (this.configuration && this.configuration.apiKey) {
+      headerParameters['Authorization'] =
+        this.configuration.apiKey('Authorization') // FirebaseAuthToken authentication
     }
 
-    /**
-     * 発表申し込みの内容を更新するエンドポイントです。
-     */
-    async updateProposal(requestParameters: UpdateProposalRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EventSpeechProposalReturn> {
-        const response = await this.updateProposalRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
+    const response = await this.request(
+      {
+        path: `/adding_proposal`,
+        method: 'PUT',
+        headers: headerParameters,
+        query: queryParameters,
+        body: EventSpeechProposalUpdateToJSON(
+          requestParameters.eventSpeechProposalUpdate
+        )
+      },
+      initOverrides
+    )
 
+    return new runtime.JSONApiResponse(response, (jsonValue) =>
+      EventSpeechProposalReturnFromJSON(jsonValue)
+    )
+  }
+
+  /**
+   * 発表申し込みの内容を更新するエンドポイントです。
+   */
+  async updateProposal(
+    requestParameters: UpdateProposalRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction
+  ): Promise<EventSpeechProposalReturn> {
+    const response = await this.updateProposalRaw(
+      requestParameters,
+      initOverrides
+    )
+    return await response.value()
+  }
 }

@@ -12,109 +12,126 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { EventSpeechProposalSpeakersInner } from './EventSpeechProposalSpeakersInner';
+import { exists, mapValues } from '../runtime'
+import type { EventSpeechProposalSpeakersInner } from './EventSpeechProposalSpeakersInner'
 import {
-    EventSpeechProposalSpeakersInnerFromJSON,
-    EventSpeechProposalSpeakersInnerFromJSONTyped,
-    EventSpeechProposalSpeakersInnerToJSON,
-} from './EventSpeechProposalSpeakersInner';
+  EventSpeechProposalSpeakersInnerFromJSON,
+  EventSpeechProposalSpeakersInnerFromJSONTyped,
+  EventSpeechProposalSpeakersInnerToJSON
+} from './EventSpeechProposalSpeakersInner'
 
 /**
- * 
+ *
  * @export
  * @interface EventSpeechProposalUpdate
  */
 export interface EventSpeechProposalUpdate {
-    /**
-     * 申し込みのID
-     * @type {string}
-     * @memberof EventSpeechProposalUpdate
-     */
-    id?: string;
-    /**
-     * 発表形式。presentationまたはposter
-     * @type {string}
-     * @memberof EventSpeechProposalUpdate
-     */
-    presentationType?: string;
-    /**
-     * 発表タイトル
-     * @type {string}
-     * @memberof EventSpeechProposalUpdate
-     */
-    title?: string;
-    /**
-     * 発表概要
-     * @type {string}
-     * @memberof EventSpeechProposalUpdate
-     */
-    _abstract?: string;
-    /**
-     * 発表時間(分)
-     * @type {number}
-     * @memberof EventSpeechProposalUpdate
-     */
-    estimatedTime?: number;
-    /**
-     * ゼミ名または所属組織 ※運営委員としての発表の場合などはofficial, など例外があります
-     * @type {string}
-     * @memberof EventSpeechProposalUpdate
-     */
-    seminar?: string;
-    /**
-     * 登壇者情報
-     * @type {Array<EventSpeechProposalSpeakersInner>}
-     * @memberof EventSpeechProposalUpdate
-     */
-    speakers?: Array<EventSpeechProposalSpeakersInner>;
+  /**
+   * 申し込みのID
+   * @type {string}
+   * @memberof EventSpeechProposalUpdate
+   */
+  id?: string
+  /**
+   * 発表形式。presentationまたはposter
+   * @type {string}
+   * @memberof EventSpeechProposalUpdate
+   */
+  presentationType?: string
+  /**
+   * 発表タイトル
+   * @type {string}
+   * @memberof EventSpeechProposalUpdate
+   */
+  title?: string
+  /**
+   * 発表概要
+   * @type {string}
+   * @memberof EventSpeechProposalUpdate
+   */
+  _abstract?: string
+  /**
+   * 発表時間(分)
+   * @type {number}
+   * @memberof EventSpeechProposalUpdate
+   */
+  estimatedTime?: number
+  /**
+   * ゼミ名または所属組織 ※運営委員としての発表の場合などはofficial, など例外があります
+   * @type {string}
+   * @memberof EventSpeechProposalUpdate
+   */
+  seminar?: string
+  /**
+   * 登壇者情報
+   * @type {Array<EventSpeechProposalSpeakersInner>}
+   * @memberof EventSpeechProposalUpdate
+   */
+  speakers?: Array<EventSpeechProposalSpeakersInner>
 }
 
 /**
  * Check if a given object implements the EventSpeechProposalUpdate interface.
  */
 export function instanceOfEventSpeechProposalUpdate(value: object): boolean {
-    let isInstance = true;
+  let isInstance = true
 
-    return isInstance;
+  return isInstance
 }
 
-export function EventSpeechProposalUpdateFromJSON(json: any): EventSpeechProposalUpdate {
-    return EventSpeechProposalUpdateFromJSONTyped(json, false);
+export function EventSpeechProposalUpdateFromJSON(
+  json: any
+): EventSpeechProposalUpdate {
+  return EventSpeechProposalUpdateFromJSONTyped(json, false)
 }
 
-export function EventSpeechProposalUpdateFromJSONTyped(json: any, ignoreDiscriminator: boolean): EventSpeechProposalUpdate {
-    if ((json === undefined) || (json === null)) {
-        return json;
-    }
-    return {
-        
-        'id': !exists(json, 'Id') ? undefined : json['Id'],
-        'presentationType': !exists(json, 'presentationType') ? undefined : json['presentationType'],
-        'title': !exists(json, 'title') ? undefined : json['title'],
-        '_abstract': !exists(json, 'abstract') ? undefined : json['abstract'],
-        'estimatedTime': !exists(json, 'estimated_time') ? undefined : json['estimated_time'],
-        'seminar': !exists(json, 'seminar') ? undefined : json['seminar'],
-        'speakers': !exists(json, 'speakers') ? undefined : ((json['speakers'] as Array<any>).map(EventSpeechProposalSpeakersInnerFromJSON)),
-    };
+export function EventSpeechProposalUpdateFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): EventSpeechProposalUpdate {
+  if (json === undefined || json === null) {
+    return json
+  }
+  return {
+    id: !exists(json, 'Id') ? undefined : json['Id'],
+    presentationType: !exists(json, 'presentationType')
+      ? undefined
+      : json['presentationType'],
+    title: !exists(json, 'title') ? undefined : json['title'],
+    _abstract: !exists(json, 'abstract') ? undefined : json['abstract'],
+    estimatedTime: !exists(json, 'estimated_time')
+      ? undefined
+      : json['estimated_time'],
+    seminar: !exists(json, 'seminar') ? undefined : json['seminar'],
+    speakers: !exists(json, 'speakers')
+      ? undefined
+      : (json['speakers'] as Array<any>).map(
+          EventSpeechProposalSpeakersInnerFromJSON
+        )
+  }
 }
 
-export function EventSpeechProposalUpdateToJSON(value?: EventSpeechProposalUpdate | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
-    }
-    return {
-        
-        'Id': value.id,
-        'presentationType': value.presentationType,
-        'title': value.title,
-        'abstract': value._abstract,
-        'estimated_time': value.estimatedTime,
-        'seminar': value.seminar,
-        'speakers': value.speakers === undefined ? undefined : ((value.speakers as Array<any>).map(EventSpeechProposalSpeakersInnerToJSON)),
-    };
+export function EventSpeechProposalUpdateToJSON(
+  value?: EventSpeechProposalUpdate | null
+): any {
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
+  return {
+    Id: value.id,
+    presentationType: value.presentationType,
+    title: value.title,
+    abstract: value._abstract,
+    estimated_time: value.estimatedTime,
+    seminar: value.seminar,
+    speakers:
+      value.speakers === undefined
+        ? undefined
+        : (value.speakers as Array<any>).map(
+            EventSpeechProposalSpeakersInnerToJSON
+          )
+  }
 }
-

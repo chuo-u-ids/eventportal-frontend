@@ -12,69 +12,71 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { UserCheckReturnData } from './UserCheckReturnData';
+import { exists, mapValues } from '../runtime'
+import type { UserCheckReturnData } from './UserCheckReturnData'
 import {
-    UserCheckReturnDataFromJSON,
-    UserCheckReturnDataFromJSONTyped,
-    UserCheckReturnDataToJSON,
-} from './UserCheckReturnData';
+  UserCheckReturnDataFromJSON,
+  UserCheckReturnDataFromJSONTyped,
+  UserCheckReturnDataToJSON
+} from './UserCheckReturnData'
 
 /**
- * 
+ *
  * @export
  * @interface UserCheckReturn
  */
 export interface UserCheckReturn {
-    /**
-     * 操作のステータス
-     * @type {string}
-     * @memberof UserCheckReturn
-     */
-    status?: string;
-    /**
-     * 
-     * @type {UserCheckReturnData}
-     * @memberof UserCheckReturn
-     */
-    data?: UserCheckReturnData;
+  /**
+   * 操作のステータス
+   * @type {string}
+   * @memberof UserCheckReturn
+   */
+  status?: string
+  /**
+   *
+   * @type {UserCheckReturnData}
+   * @memberof UserCheckReturn
+   */
+  data?: UserCheckReturnData
 }
 
 /**
  * Check if a given object implements the UserCheckReturn interface.
  */
 export function instanceOfUserCheckReturn(value: object): boolean {
-    let isInstance = true;
+  let isInstance = true
 
-    return isInstance;
+  return isInstance
 }
 
 export function UserCheckReturnFromJSON(json: any): UserCheckReturn {
-    return UserCheckReturnFromJSONTyped(json, false);
+  return UserCheckReturnFromJSONTyped(json, false)
 }
 
-export function UserCheckReturnFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserCheckReturn {
-    if ((json === undefined) || (json === null)) {
-        return json;
-    }
-    return {
-        
-        'status': !exists(json, 'status') ? undefined : json['status'],
-        'data': !exists(json, 'data') ? undefined : UserCheckReturnDataFromJSON(json['data']),
-    };
+export function UserCheckReturnFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): UserCheckReturn {
+  if (json === undefined || json === null) {
+    return json
+  }
+  return {
+    status: !exists(json, 'status') ? undefined : json['status'],
+    data: !exists(json, 'data')
+      ? undefined
+      : UserCheckReturnDataFromJSON(json['data'])
+  }
 }
 
 export function UserCheckReturnToJSON(value?: UserCheckReturn | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
-    }
-    return {
-        
-        'status': value.status,
-        'data': UserCheckReturnDataToJSON(value.data),
-    };
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
+  return {
+    status: value.status,
+    data: UserCheckReturnDataToJSON(value.data)
+  }
 }
-

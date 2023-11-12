@@ -20,8 +20,8 @@
         You are currently logged in as:
         <br />
         <img
-          class="avatar"
           v-if="user.photoURL"
+          class="avatar"
           :src="user.photoURL"
           referrerpolicy="no-referrer"
         />
@@ -30,7 +30,6 @@
           >{{ user.isAnonymous ? '🥸' : '' }} {{ user.displayName }}.</strong
         >
       </div>
-
 
       <button @click="signOut(auth)">Logout</button>
     </template>
@@ -46,27 +45,27 @@
 </template>
 
 <script lang="ts">
-import { GoogleAuthProvider } from 'firebase/auth'
-export const googleAuthProvider = new GoogleAuthProvider()
-</script>
-
-<script lang="ts" setup>
 import {
+  GoogleAuthProvider,
   getRedirectResult,
   signInAnonymously,
   signInWithPopup,
   signInWithRedirect,
-  signOut,
+  signOut
 } from 'firebase/auth'
+</script>
+
+<script lang="ts" setup>
 import {
   useCurrentUser,
   useFirebaseAuth,
-  useIsCurrentUserLoaded,
+  useIsCurrentUserLoaded
 } from 'vuefire'
+const googleAuthProvider = new GoogleAuthProvider()
 
 definePageMeta({
   linkTitle: 'Login',
-  order: 2,
+  order: 2
 })
 
 const auth = useFirebaseAuth()! // only exists on client side
@@ -99,7 +98,6 @@ onMounted(() => {
 
 const route = useRoute()
 </script>
-
 
 <style scoped>
 .avatar {

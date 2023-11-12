@@ -12,70 +12,76 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { exists, mapValues } from '../runtime'
 /**
- * 
+ *
  * @export
  * @interface EventSpeechProposalErrorReturn
  */
 export interface EventSpeechProposalErrorReturn {
-    /**
-     * 申し込みのステータス
-     * @type {string}
-     * @memberof EventSpeechProposalErrorReturn
-     */
-    status?: string;
-    /**
-     * 申し込みのID
-     * @type {string}
-     * @memberof EventSpeechProposalErrorReturn
-     */
-    id?: string;
-    /**
-     * エラーメッセージ
-     * @type {string}
-     * @memberof EventSpeechProposalErrorReturn
-     */
-    message?: string;
+  /**
+   * 申し込みのステータス
+   * @type {string}
+   * @memberof EventSpeechProposalErrorReturn
+   */
+  status?: string
+  /**
+   * 申し込みのID
+   * @type {string}
+   * @memberof EventSpeechProposalErrorReturn
+   */
+  id?: string
+  /**
+   * エラーメッセージ
+   * @type {string}
+   * @memberof EventSpeechProposalErrorReturn
+   */
+  message?: string
 }
 
 /**
  * Check if a given object implements the EventSpeechProposalErrorReturn interface.
  */
-export function instanceOfEventSpeechProposalErrorReturn(value: object): boolean {
-    let isInstance = true;
+export function instanceOfEventSpeechProposalErrorReturn(
+  value: object
+): boolean {
+  let isInstance = true
 
-    return isInstance;
+  return isInstance
 }
 
-export function EventSpeechProposalErrorReturnFromJSON(json: any): EventSpeechProposalErrorReturn {
-    return EventSpeechProposalErrorReturnFromJSONTyped(json, false);
+export function EventSpeechProposalErrorReturnFromJSON(
+  json: any
+): EventSpeechProposalErrorReturn {
+  return EventSpeechProposalErrorReturnFromJSONTyped(json, false)
 }
 
-export function EventSpeechProposalErrorReturnFromJSONTyped(json: any, ignoreDiscriminator: boolean): EventSpeechProposalErrorReturn {
-    if ((json === undefined) || (json === null)) {
-        return json;
-    }
-    return {
-        
-        'status': !exists(json, 'status') ? undefined : json['status'],
-        'id': !exists(json, 'Id') ? undefined : json['Id'],
-        'message': !exists(json, 'message') ? undefined : json['message'],
-    };
+export function EventSpeechProposalErrorReturnFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): EventSpeechProposalErrorReturn {
+  if (json === undefined || json === null) {
+    return json
+  }
+  return {
+    status: !exists(json, 'status') ? undefined : json['status'],
+    id: !exists(json, 'Id') ? undefined : json['Id'],
+    message: !exists(json, 'message') ? undefined : json['message']
+  }
 }
 
-export function EventSpeechProposalErrorReturnToJSON(value?: EventSpeechProposalErrorReturn | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
-    }
-    return {
-        
-        'status': value.status,
-        'Id': value.id,
-        'message': value.message,
-    };
+export function EventSpeechProposalErrorReturnToJSON(
+  value?: EventSpeechProposalErrorReturn | null
+): any {
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
+  return {
+    status: value.status,
+    Id: value.id,
+    message: value.message
+  }
 }
-

@@ -1,0 +1,71 @@
+name: Release production
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Cache Node Modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.bun
+          key: ${{ runner.os }}-${{ env.project-name }}-${{ hashFiles(format('{0}{1}', github.workspace, '/bun.lockb')) }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.project-name }}-
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID_PROD }}
+          aws_role_name: ${{ secrets.AWS_IAM_ROLE_NAME_PROD }}
+          github_token: ${{ secrets.GH_PERSONAL_TOKEN }}
+
+      - name: Package Install
+        run: bun install
+
+      - name: Build
+        run: bun run generate
+
+      - name: Publish to AWS S3
+        id: s3_sync
+        run: |
+          aws s3 cp --recursive \
+            ./dist \
+            s3://${{ vars.S3_BUCKET_NAME_PROD }}/
+
+      - name: Evict CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ vars.AWS_CLOUDFRONT_ID_PROD }} --paths "/*"
+
+      - name: Generate release tag
+        if: steps.s3_sync.outcome == 'success'
+        id: release_tag
+        run: |
+          VERSION=$(date +'%Y.%m.%d.%H%M')
+          echo "VERSION=v$VERSION" >> $GITHUB_OUTPUT
+        env:
+          TZ: 'Asia/Tokyo'
+
+      - uses: release-drafter/release-drafter@v5
+        if: steps.s3_sync.outcome == 'success'
+        with:
+          tag: ${{ steps.release_tag.outputs.VERSION }}
+          name: ${{ steps.release_tag.outputs.VERSION }}
+          version: ${{ steps.release_tag.outputs.VERSION }}
+          publish: true
+          commitish: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

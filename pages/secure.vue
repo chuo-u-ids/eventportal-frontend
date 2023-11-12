@@ -1,11 +1,12 @@
 <template>
-  <p>Secure</p>
-  <p>{{ user }}</p>
+  <div>
+    <p>Secure</p>
+    <p>{{ user }}</p>
+  </div>
 </template>
 <script lang="ts" setup>
 definePageMeta({
-  middleware: ['auth'],
+  middleware: ['auth']
 })
 const user = useCurrentUser()
-
 </script>

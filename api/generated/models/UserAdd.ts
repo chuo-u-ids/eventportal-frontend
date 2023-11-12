@@ -12,70 +12,70 @@
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { exists, mapValues } from '../runtime'
 /**
- * 
+ *
  * @export
  * @interface UserAdd
  */
 export interface UserAdd {
-    /**
-     * 名前
-     * @type {string}
-     * @memberof UserAdd
-     */
-    name?: string;
-    /**
-     * 所属
-     * @type {string}
-     * @memberof UserAdd
-     */
-    affiliation?: string;
-    /**
-     * 学部学科
-     * @type {string}
-     * @memberof UserAdd
-     */
-    department?: string;
+  /**
+   * 名前
+   * @type {string}
+   * @memberof UserAdd
+   */
+  name?: string
+  /**
+   * 所属
+   * @type {string}
+   * @memberof UserAdd
+   */
+  affiliation?: string
+  /**
+   * 学部学科
+   * @type {string}
+   * @memberof UserAdd
+   */
+  department?: string
 }
 
 /**
  * Check if a given object implements the UserAdd interface.
  */
 export function instanceOfUserAdd(value: object): boolean {
-    let isInstance = true;
+  let isInstance = true
 
-    return isInstance;
+  return isInstance
 }
 
 export function UserAddFromJSON(json: any): UserAdd {
-    return UserAddFromJSONTyped(json, false);
+  return UserAddFromJSONTyped(json, false)
 }
 
-export function UserAddFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserAdd {
-    if ((json === undefined) || (json === null)) {
-        return json;
-    }
-    return {
-        
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'affiliation': !exists(json, 'affiliation') ? undefined : json['affiliation'],
-        'department': !exists(json, 'department') ? undefined : json['department'],
-    };
+export function UserAddFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): UserAdd {
+  if (json === undefined || json === null) {
+    return json
+  }
+  return {
+    name: !exists(json, 'name') ? undefined : json['name'],
+    affiliation: !exists(json, 'affiliation') ? undefined : json['affiliation'],
+    department: !exists(json, 'department') ? undefined : json['department']
+  }
 }
 
 export function UserAddToJSON(value?: UserAdd | null): any {
-    if (value === undefined) {
-        return undefined;
-    }
-    if (value === null) {
-        return null;
-    }
-    return {
-        
-        'name': value.name,
-        'affiliation': value.affiliation,
-        'department': value.department,
-    };
+  if (value === undefined) {
+    return undefined
+  }
+  if (value === null) {
+    return null
+  }
+  return {
+    name: value.name,
+    affiliation: value.affiliation,
+    department: value.department
+  }
 }
-

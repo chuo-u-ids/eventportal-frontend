@@ -1,0 +1,25 @@
+name: 'Setup'
+description: 'Setup environment for the following steps'
+
+inputs:
+  aws_account_id:
+    description: 'AWS account ID'
+    required: true
+  aws_role_name:
+    description: 'AWS IAM role name'
+    required: true
+  github_token:
+    description: 'GitHub personal access token'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Install dependencies
+      run: bun install
+      shell: bash
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: arn:aws:iam::${{ inputs.aws_account_id }}:role/${{ inputs.aws_role_name }}
+        aws-region: us-east-1

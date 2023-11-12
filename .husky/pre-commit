@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+bun lint:js
+bun lint:style
+bun lint:prettier
+bun install --frozen-lockfile
