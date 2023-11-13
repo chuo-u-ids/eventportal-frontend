@@ -16,7 +16,7 @@
     "lint:style-fix": "stylelint \"**/*.vue\" \",**/*.css\" \",**/*.scss\" --ignore-path .gitignore --fix",
     "fix": "bun run lint:prettier-fix; bun run lint:js-fix; bun run lint:style-fix",
     "prepare": "husky install",
-    "gen-api": "openapi-generator-cli generate -i docs/coefont.openapi.json -g typescript-fetch -o scripts/openapi"
+    "gen:api": "openapi-generator-cli generate -i docs/openapi.yml -g typescript-fetch -o api/generated"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",

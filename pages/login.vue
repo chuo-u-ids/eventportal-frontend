@@ -35,27 +35,19 @@
     </template>
 
     <template v-else>
-      <button @click="signinRedirect()">SignIn with Google (redirect)</button>
-      <br />
       <button @click="signinPopup()">SignIn with Google (popup)</button>
-      <!-- <br /> -->
-      <!-- <button @click="signInAnonymously(auth)">SignIn Anonymously</button> -->
     </template>
   </main>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {
   GoogleAuthProvider,
   getRedirectResult,
-  signInAnonymously,
   signInWithPopup,
   signInWithRedirect,
   signOut
 } from 'firebase/auth'
-</script>
-
-<script lang="ts" setup>
 import {
   useCurrentUser,
   useFirebaseAuth,

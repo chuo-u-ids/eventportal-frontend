@@ -11,10 +11,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ProposalApi, type EventSpeechProposalAllReturn } from '~/api/generated'
+import {
+  ProposalApi,
+  type EventSpeechProposalReturnItem
+} from '~/api/generated'
 const api = new ProposalApi()
 
-const allArray: Ref<EventSpeechProposalAllReturn> = ref({})
+const allArray: Ref<Array<EventSpeechProposalReturnItem> | undefined> = ref([
+  {}
+])
 
 onMounted(async () => {
   try {

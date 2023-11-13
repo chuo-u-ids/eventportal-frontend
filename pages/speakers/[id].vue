@@ -2,17 +2,19 @@
   <div>
     <p>展示・発表内容の確認</p>
     <hr />
-    <p>発表タイトル: {{ dataToDisplay.title }}</p>
+    <p>発表タイトル: {{ dataToDisplay?.title }}</p>
     <p>登録番号: {{ id }}</p>
-    <p>発表方法: {{ checkPresentationType(dataToDisplay.presentationType) }}</p>
+    <p>
+      発表方法: {{ checkPresentationType(dataToDisplay?.presentationType) }}
+    </p>
     <p>発表概要</p>
-    <p>{{ dataToDisplay._abstract }}</p>
+    <p>{{ dataToDisplay?._abstract }}</p>
     <p>
       発表者:
-      <span v-for="speaker in dataToDisplay.speakers" :key="speaker"
+      <span v-for="speaker in dataToDisplay?.speakers" :key="speaker"
         >{{ speaker }}
       </span>
-      （{{ dataToDisplay.seminar }}より）
+      （{{ dataToDisplay?.seminar }}より）
     </p>
   </div>
 </template>
@@ -25,7 +27,7 @@ import {
   type EventSpeechProposalReturnItem
 } from '~/api/generated'
 const id = useRoute().params.id
-const dataToDisplay: Ref<EventSpeechProposalReturnItem> = ref({})
+const dataToDisplay: Ref<EventSpeechProposalReturnItem | undefined> = ref({})
 const api = new ProposalApi()
 
 onMounted(async () => {
