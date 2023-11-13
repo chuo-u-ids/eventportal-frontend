@@ -4,36 +4,40 @@ export default defineNuxtConfig({
   ssr: false,
   app: {
     head: {
-      title: 'Mizphses / 尾川史典',
+      title: 'C+ iDS Eventportal',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width,initial-scale=1' },
         {
           name: 'description',
-          content: 'Mizphses / 尾川史典の公式サイトです。'
+          content: 'iDS C+Eventportal'
         },
         // ogp
         {
           hid: 'og:site_name',
           property: 'og:site_name',
-          content: 'Mizphses / 尾川史典'
+          content: 'C+ iDS Eventportal'
         },
         {
           hid: 'og:title',
           property: 'og:title',
-          content: 'Mizphses / 尾川史典'
+          content: 'C+ iDS Eventportal'
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: 'Mizphses / 尾川史典の公式サイトです。'
+          content: 'iDS C+Eventportal'
         },
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://mizphs.es/photo/ogp.webp'
+          content: 'https://eventportal2023.chuo.club/ogp.webp'
         },
-        { hid: 'og:url', property: 'og:url', content: 'https://mizphs.es' },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: 'https://eventportal2023.chuo.club'
+        },
         { hid: 'og:type', property: 'og:type', content: 'website' },
         // social
         {
@@ -41,26 +45,26 @@ export default defineNuxtConfig({
           name: 'twitter:card',
           content: 'summary_large_image'
         },
-        { hid: 'twitter:site', name: 'twitter:site', content: '@mizphses' },
+        { hid: 'twitter:site', name: 'twitter:site', content: '@Chuo_AIandDS' },
         {
           hid: 'twitter:creator',
           name: 'twitter:creator',
-          content: '@mizphses'
+          content: '@Chuo_AIandDS'
         },
         {
           hid: 'twitter:title',
           name: 'twitter:title',
-          content: 'Mizphses / 尾川史典'
+          content: 'C+ iDS Eventportal'
         },
         {
           hid: 'twitter:description',
           name: 'twitter:description',
-          content: 'Mizphses / 尾川史典の公式サイトです。'
+          content: 'iDS用 C+Eventportal'
         },
         {
           hid: 'twitter:image',
           name: 'twitter:image',
-          content: 'https://mizphs.es/photo/ogp.webp'
+          content: 'https://eventportal2023.chuo.club/ogp.webp'
         },
         { hid: 'fb:app_id', property: 'fb:app_id', content: '293812290225032' }
       ],
