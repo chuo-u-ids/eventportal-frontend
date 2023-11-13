@@ -1,75 +1,44 @@
-# Nuxt 3 Minimal Starter
+# Eventportal　フロントエンド
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+このレポジトリはEventportalのフロントエンドです。
 
-## Setup
+NuxtJS（Vue）で開発されています。開発担当者がVueが好きでこれを使ってるだけなので、お好みに応じてReactなりSvelteなりViteなりに書き換えていただいて一向に構いません。
 
-Make sure to install the dependencies:
+## 開発の前に ~ 必要なもの
 
-```bash
-# npm
-npm install
+### Bunランタイム
 
-# pnpm
-pnpm install
+BunというJSランタイム・パッケージマネージャーが必要です。
 
-# yarn
-yarn install
+以下のコマンドを実行すればインストールできます。
 
-# bun
-bun install
+```zsh
+curl -fsSL https://bun.sh/install | bash
 ```
 
-## Development Server
+### 各種依存関係のインストールやAPIアクセス用コードの生成
 
-Start the development server on `http://localhost:3000`:
+以下のコマンドを実行してください。
 
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+```zsh
+bun install; bun gen:api
 ```
 
-## Production
+## 開発サーバーの立ち上げ
 
-Build the application for production:
+以下のコマンドを実行してください。原則的に開発モード（`bun dev`）でおおむねの挙動を再現できます。
 
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+```zsh
+bun dev # 開発モード
+bun preview # 本番環境モード
 ```
 
-Locally preview production build:
+## デプロイ方法
 
-```bash
-# npm
-npm run preview
+詳細は[chuo-u-ids/docs](https://github.com/chuo-u-ids/docs.git)のドキュメントを読んでください。
 
-# pnpm
-pnpm run preview
+![手順画像](https://github.com/chuo-u-ids/eventportal-frontend/assets/49401718/4fd14163-33f9-4ba1-b4fe-45b85619c476)
 
-# yarn
-yarn preview
+デプロイ先の管理はBE/FE一括して [@mizphses](https://mizphs.es) (尾川) が担当しています。
 
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+デプロイ先のドメイン変更など含めご確認は尾川までお願いします。

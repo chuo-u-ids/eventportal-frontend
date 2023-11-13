@@ -2,3 +2,4 @@
 /.nuxt/**
 /dist/**
 package-lock.json
+/api/

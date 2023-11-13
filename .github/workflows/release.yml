@@ -37,6 +37,9 @@ jobs:
       - name: Package Install
         run: bun install
 
+      - name: Generate API
+        run: bun run gen:api
+
       - name: Build
         run: bun run generate
         env:
