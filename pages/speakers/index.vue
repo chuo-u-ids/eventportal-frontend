@@ -1,11 +1,20 @@
 <template>
-  <div>
+  <div class="content">
     <h2>登壇検索システム</h2>
-    <p>本イベントの登壇者を以下から検索していただけます。</p>
-    <div v-for="item in allArray" :key="item.id">
+    <p>本イベントの登壇情報を以下から検索していただけます。</p>
+    <div v-for="item in allArray" :key="item.id" class="proposals">
       <h3>{{ item.title }}</h3>
-      <p>{{ item._abstract }}</p>
-      <p>{{ item.speakers }}</p>
+      <p>発表者所属: {{ item.seminar }}</p>
+      <p>
+        発表者：<span v-for="speaker in item.speakers" :key="speaker.name"
+          >{{ speaker.name }},
+        </span>
+      </p>
+      <p>
+        概要:
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <span v-html="item._abstract?.replace(/\r?\n/g, '<br />')"></span>
+      </p>
     </div>
   </div>
 </template>
@@ -30,3 +39,11 @@ onMounted(async () => {
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.proposals {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+</style>

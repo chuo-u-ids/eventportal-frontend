@@ -62,7 +62,7 @@ import {
   useIsCurrentUserLoaded
 } from 'vuefire'
 
-import { AccountApi } from '@/api/generated'
+import { AccountApi, Configuration } from '@/api/generated'
 
 import Logo from '@/components/parts/logo.vue'
 
@@ -72,8 +72,8 @@ const locationList = [
     path: '/'
   },
   {
-    name: 'About',
-    path: '/about'
+    name: 'Speakers',
+    path: '/speakers'
   }
 ]
 
@@ -98,13 +98,13 @@ const logoff = (auth: any) => {
 }
 
 const getUserInfo = async () => {
-  const api = new AccountApi()
   const getToken = await auth.currentUser?.getIdToken()
-  api.checkUser({
-    headers: {
-      Authorization: getToken as string
-    }
+
+  const config = new Configuration({
+    apiKey: getToken ? () => getToken : undefined
   })
+  const api = new AccountApi(config)
+  api.checkUser()
 }
 
 onMounted(() => {
