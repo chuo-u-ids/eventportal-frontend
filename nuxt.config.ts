@@ -97,7 +97,8 @@ export default defineNuxtConfig({
       authDomain:
         process.env.FIREBASE_AUTH_DOMAIN ||
         'chuo-u-eventportal.firebaseapp.com',
-      projectId: process.env.FIREBASE_PROJECT_ID || 'chuo-u-eventportal'
+      projectId: process.env.FIREBASE_PROJECT_ID || 'chuo-u-eventportal',
+      measurementId: 'G-1PSVTBNP1L'
     },
     auth: {
       enabled: true,
